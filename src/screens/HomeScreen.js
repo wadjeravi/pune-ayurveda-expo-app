@@ -1,37 +1,38 @@
-import { StyleSheet, Text, View, StatusBar, TextInput } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, ScrollView } from 'react-native';
 import React from 'react';
 import HomeHeadNav from '../components/HomeHeadNav';
 import OfferSlider from '../components/OfferSlider';
 import BottomNav from '../components/BottomNav';
 import Categories from '../components/Categories';
-//import Favouritepicks from '../components/Favouritepicks';
+import FavouritePicks from '../components/FavouritePicks';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../globals/style';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <StatusBar />
-      <HomeHeadNav navigation={navigation} />
+      
+        <StatusBar />
+        <HomeHeadNav navigation={navigation} />
+        <ScrollView showsVerticalScrollIndicator={false}>
 
+        <View style={styles.searchbox}>
+          <AntDesign name="search1" size={24} color="black" style={
+            styles.searchicon
+          } />
+          <TextInput style={styles.input} placeholder="Search for over 5000 products" onChangeText={(e) => {
+            setSearch(e)
+          }} />
+
+        </View>
+        <OfferSlider />
+        <FavouritePicks />
+        <Categories navigation={navigation}/> 
+
+      </ScrollView>
       <View style={styles.bottomnav}>
-        <BottomNav navigation={navigation} />
-      </View>
-
-      <View style={styles.searchbox}>
-        <AntDesign name="search1" size={24} color="black" style={
-          styles.searchicon
-        } />
-        <TextInput style={styles.input} placeholder="Search for over 5000 products" onChangeText={(e) => {
-          setSearch(e)
-        }} />
-
-      </View>
-      <OfferSlider />
-      <Categories/>
-     
-
-
+          <BottomNav navigation={navigation} />
+        </View>
     </View>
   );
 };
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: colors.col1,
     zIndex: 20,
-}
+  }
 
 });
 
