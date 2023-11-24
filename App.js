@@ -3,6 +3,7 @@ import React from 'react'
 import HomeScreen from './src/screens/HomeScreen'
 import Userprofile from './src/screens/UserProfile'
 import Settings from './src/screens/Settings'
+import CategoriesListingPage from './src/screens/CategoriesListingPage'
 import shoppingcart from './src/screens/shoppingcart'
 import Map from './src/screens/Map'
 
@@ -39,6 +40,11 @@ export default function App() {
           }}
         />
         <Stack.Screen name="shoppingcart" component={shoppingcart}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name="categoriesListingPage" component={CategoriesListingPage}
           options={{
             headerShown: false,
           }}
