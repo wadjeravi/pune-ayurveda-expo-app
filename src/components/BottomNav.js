@@ -15,10 +15,11 @@ const BottomNav = ({ navigation }) => {
       <View>
         <AntDesign name="shoppingcart" size={30} color="black" style={styles.icon1} onPress={() => { navigation.navigate('shoppingcart') }} />
       </View>
-      <View>
+      {/* <View>
         <FontAwesome5 name="map" size={30} color="black" style={styles.icon1} onPress={() => { navigation.navigate('Map') }} />
-      </View>
+      </View> */}
     </View>
+    
   );
 };
 
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     elevation: 30,
+    height:50,
     borderTopWidth: 0.5,
   },
   icon1: {

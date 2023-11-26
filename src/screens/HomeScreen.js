@@ -12,31 +12,29 @@ import { colors } from '../globals/style';
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      
-        <StatusBar />
-        <HomeHeadNav navigation={navigation} />
-        <ScrollView showsVerticalScrollIndicator={false}>
+
+      <StatusBar />
+      <HomeHeadNav navigation={navigation} />
+      <ScrollView showsVerticalScrollIndicator={false}>
 
         <View style={styles.searchbox}>
           <AntDesign name="search1" size={24} color="black" style={
             styles.searchicon
           } />
-          <TextInput style={styles.input} placeholder="Search for over 5000 products" onChangeText={(e) => {
-            setSearch(e)
-          }} />
-
+          <TextInput style={styles.input} placeholder="Search for over 5000 products"
+          //  onChangeText={(e) => {
+          //   setSearch(e)
+          // }} 
+          />
         </View>
         <OfferSlider />
-
         <FavouritePicks />
-        <Categories navigation={navigation}/> 
+        <Categories navigation={navigation} />
       </ScrollView>
       <View>
-          <BottomNav navigation={navigation} />
-        </View>
+        <BottomNav navigation={navigation} />
+      </View>
     </View>
-    
-
   );
 };
 
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
     // marginTop: 50,
     flex: 1,
     backgroundColor: colors.col1,
-    // alignItems: 'center',
+    alignItems: 'center',
     width: '100%',
     height: '80%',
   },
@@ -61,15 +59,21 @@ const styles = StyleSheet.create({
     margin: 20,
     elevation: 10,
   },
+  input: {
+    marginLeft: 10,
+    width: '90%',
+    fontSize: 15,
+    // color: colors.text1,
+  },
   bottomnav: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
     backgroundColor: colors.col1,
     zIndex: 20,
-    height:30,
+    height: 50,
     //marginTop:50,
-}
+  }
 });
 
 
