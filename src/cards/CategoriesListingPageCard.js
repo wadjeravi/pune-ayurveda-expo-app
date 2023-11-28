@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, Text, TouchableOpacity, Image ,StyleSheet} from 'react-native'
 
 const CategoriesListingPageCard = ({ item, selectedJob, handleCardPress }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAddButtonPress = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleRemoveButtonPress = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
   return (
     <TouchableOpacity
       style={styles.container(selectedJob, item)}
@@ -31,9 +42,25 @@ const CategoriesListingPageCard = ({ item, selectedJob, handleCardPress }) => {
       <View style={styles.discountPriceView}>
         <Text style={styles.discountPrices}>{item.discountPrice}</Text>
       </View>
-      <TouchableOpacity style={styles.addButton} onPress={() => handleImagePress(item)}>
-        <Text style={styles.addButtonText}>Add</Text>
-      </TouchableOpacity>
+      <View style={styles.addButtonContainer}>
+        {quantity === 0 ? (
+          <TouchableOpacity onPress={handleAddButtonPress}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Add</Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.button}>
+            <TouchableOpacity onPress={handleRemoveButtonPress}>
+              <Text style={styles.buttonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.quantityText}>{quantity}</Text>
+            <TouchableOpacity onPress={handleAddButtonPress}>
+              <Text style={styles.buttonText}>+</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   )
 }
@@ -55,20 +82,6 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.3,
       shadowRadius: 3,
     }),
-    addButton: {
-      position: 'absolute',
-      justifyContent:"center",
-      alignItems:"center",
-      bottom: 5,
-      right: 5,
-      borderRadius:8,
-      borderColor:'red',
-      borderWidth:1,
-      backgroundColor: 'white', 
-      padding: 4, 
-      width:50,
-      height:30
-    },
     originalPriceView:{
       position: 'absolute',
       bottom: 20,
@@ -87,11 +100,6 @@ const styles = StyleSheet.create({
     discountPrices:{
       color:'black',
       fontSize:12,
-    },
-    addButtonText: {
-      color: 'red', 
-      fontWeight:'bold',
-      fontSize:12
     },
     discountView: {
       backgroundColor: 'purple',
@@ -113,5 +121,33 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
       fontSize: 12, // Adjust the font size for the description
+    },
+    addButtonContainer: {
+      position: 'absolute',
+      bottom: 2,
+      right: 1,
+      flexDirection: 'row',
+    },
+    button: {
+      backgroundColor: 'white',
+      borderColor: 'red',
+      borderWidth: 1,
+      borderRadius: 8,
+      paddingVertical: 4,
+      paddingHorizontal: 6,
+      marginHorizontal: 4, // Add margin to separate buttons
+      flexDirection: 'row', // Ensure the text is in a row
+    },
+    buttonText: {
+      color: 'red',
+      fontSize: 16,
+      textAlign: 'center',
+      marginHorizontal: 4, // Add margin to separate buttons
+    },
+    quantityText: {
+      fontSize: 16,
+      color: 'red',
+      marginHorizontal: 8,
+      marginHorizontal: 4, // Add margin to separate buttons
     },
   });

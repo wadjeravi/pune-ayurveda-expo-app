@@ -4,7 +4,7 @@ import HomeHeadNav from '../components/HomeHeadNav';
 import OfferSlider from '../components/OfferSlider';
 import BottomNav from '../components/BottomNav';
 import Categories from '../components/Categories';
-import FavouritePicks from '../components/FavouritePicks';
+import FavouritePicks from '../components/Favouritepicks';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../globals/style';
 
