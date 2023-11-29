@@ -5,20 +5,28 @@ import Userprofile from './src/screens/UserProfile'
 import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
 import shoppingcart from './src/screens/shoppingcart'
-import Map from './src/screens/Map'
+//import Map from './src/screens/Map'
 
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='HomeScreen'>
+      <Stack.Navigator initialRouteName='HomeScreen'
+        screenOptions={{
+          statusBarColor: 'purple',
+
+          headerStyle: {
+            backgroundColor: "purple"
+          },
+          headerTintColor: 'white',
+          // headerTitleAlign:'center'
+        }}
+      >
         <Stack.Screen name="home" component={HomeScreen}
           options={{
             headerShown: false,
@@ -26,27 +34,28 @@ export default function App() {
         />
         <Stack.Screen name="userprofile" component={Userprofile}
           options={{
-            headerShown: false,
+            headerShown: true,
           }}
         />
-        <Stack.Screen name="map" component={Map}
+        {/* <Stack.Screen name="map" component={Map}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen name="Settings" component={Settings}
           options={{
-            headerShown: false,
+            headerShown: true,
           }}
         />
         <Stack.Screen name="shoppingcart" component={shoppingcart}
           options={{
-            headerShown: false,
+            headerShown: true,
+
           }}
         />
         <Stack.Screen name="categoriesListingPage" component={CategoriesListingPage}
           options={{
-            headerShown: false,
+            headerShown: true,
           }}
         />
       </Stack.Navigator>
@@ -60,4 +69,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
 });
+
