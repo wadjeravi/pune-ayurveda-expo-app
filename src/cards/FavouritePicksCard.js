@@ -1,8 +1,20 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, TouchableOpacity, Image, StyleSheet, Button } from 'react-native'
 import { FONT, SIZES, COLORS } from "../globals/constants/theme";
 
 const FavouritePicksCard = ({ item, selectedJob, handleCardPress }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAddButtonPress = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleRemoveButtonPress = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
   return (
     <TouchableOpacity
       style={styles.container(selectedJob, item)}
@@ -20,8 +32,8 @@ const FavouritePicksCard = ({ item, selectedJob, handleCardPress }) => {
         <Text style={styles.discountText}>{item.discount}</Text>
       </View>
       <View style={{ alignItems: 'left', justifyContent: 'center' }}>
-        <Text style={{fontSize:SIZES.large}}>{item.name}</Text>
-        <Text style={{fontSize:SIZES.large}}>{item.description}</Text>
+        <Text style={{ fontSize: SIZES.large }}>{item.name}</Text>
+        <Text style={{ fontSize: SIZES.large }}>{item.description}</Text>
       </View>
       <View style={{ marginBottom: 20 }}>
         {/* Add space between name view and addbutton */}
@@ -32,9 +44,25 @@ const FavouritePicksCard = ({ item, selectedJob, handleCardPress }) => {
       <View style={styles.discountPriceView}>
         <Text style={styles.discountPrices}>{item.discountPrice}</Text>
       </View>
-      <TouchableOpacity style={styles.addButton} onPress={() => handleImagePress(item)}>
-        <Text style={styles.addButtonText}>Add</Text>
-      </TouchableOpacity>
+      <View style={styles.addButtonContainer}>
+        {quantity === 0 ? (
+          <TouchableOpacity onPress={handleAddButtonPress}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Add</Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.button}>
+            <TouchableOpacity onPress={handleRemoveButtonPress}>
+              <Text style={styles.buttonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.quantityText}>{quantity}</Text>
+            <TouchableOpacity onPress={handleAddButtonPress}>
+              <Text style={styles.buttonText}>+</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   )
 }
@@ -55,55 +83,67 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3, // Opacity of the shadow
     shadowRadius: 3, // Radius of the shadow
   }),
-  addButton: {
-    position: 'absolute',
-    justifyContent:"center",
-    alignItems:"center",
-    bottom: 5,
-    right: 5,
-    borderRadius:8,
-    borderColor:'red',
-    borderWidth:1,
-    backgroundColor: 'white', 
-    padding: 10, 
-    width:80,
-    height:40
-  },
-  originalPriceView:{
+  originalPriceView: {
     position: 'absolute',
     bottom: 20,
     left: 5,
   },
-  discountPriceView:{
+  discountPriceView: {
     position: 'absolute',
     bottom: 5,
     left: 5,
   },
-  originalPrices:{
-    color:'black',
-    textDecorationLine:'line-through'
+  originalPrices: {
+    color: 'grey',
+    textDecorationLine: 'line-through',
+    fontSize: 12
   },
-  discountPrices:{
-    color:'black',
-  },
-  addButtonText: {
-    color: 'red', 
-    fontWeight:'bold',
-    fontSize:15
+  discountPrices: {
+    color: 'black',
+    fontSize: 15
   },
   discountView: {
     backgroundColor: 'purple',
     padding: 2,
     borderTopLeftRadius: SIZES.medium,
-    borderBottomRightRadius:10,
-    alignItems: 'center', 
-    justifyContent: 'center', 
+    borderBottomRightRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
-    top: 0, 
+    top: 0,
     left: 0,
   },
   discountText: {
     color: 'white',
   },
+  addButtonContainer: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    flexDirection: 'row',
+  },
+  button: {
+    backgroundColor: 'white',
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 4, // Add margin to separate buttons
+    flexDirection: 'row', // Ensure the text is in a row
+  },
+  buttonText: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
+    marginHorizontal: 4, // Add margin to separate buttons
+  },
+  quantityText: {
+    fontSize: 16,
+    color: 'red',
+    marginHorizontal: 8,
+    marginHorizontal: 4, // Add margin to separate buttons
+  },
+
 });
 
