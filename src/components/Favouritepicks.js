@@ -7,7 +7,7 @@ import img3 from '../../assets/Images/greenTea.jpg'
 import img4 from '../../assets/Images/vitaminB12.jpg'
 import FavouritePicksCard from '../cards/FavouritePicksCard'
 
-const FavouritePicks = () => {
+const FavouritePicks = ({myCart,setMyCart}) => {
 
   const staticImages = [
     { id: '1', uri: img1, originalPrice: '$100', discountPrice: '$50', name: 'VitaminB12', description: '30 capsules', discount: "50% Off" },
@@ -29,7 +29,7 @@ const FavouritePicks = () => {
         data={staticImages}
         renderItem={({ item }) => (
           <FavouritePicksCard
-            item={item}
+            item={item} myCart={myCart} setMyCart={setMyCart}
           />
         )}
         keyExtractor={item => item?.id}

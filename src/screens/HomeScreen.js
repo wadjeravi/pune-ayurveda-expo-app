@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar, TextInput, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import HomeHeadNav from '../components/HomeHeadNav';
 import OfferSlider from '../components/OfferSlider';
 import BottomNav from '../components/BottomNav';
@@ -8,7 +8,11 @@ import FavouritePicks from '../components/Favouritepicks';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../globals/style';
 
+
 const HomeScreen = ({ navigation }) => {
+
+  const [myCart, setMyCart] = useState([]);
+  
   return (
     <View style={styles.container}>
 
@@ -27,11 +31,11 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
         <OfferSlider />
-        <FavouritePicks />
-        <Categories navigation={navigation} />
+        <FavouritePicks myCart={myCart} setMyCart={setMyCart} />
+        <Categories navigation={navigation}/>
       </ScrollView>
       <View>
-        <BottomNav navigation={navigation} />
+        <BottomNav myCart={myCart} navigation={navigation} />
       </View>
     </View>
   );
@@ -74,5 +78,3 @@ const styles = StyleSheet.create({
     //marginTop:50,
   }
 });
-
-
