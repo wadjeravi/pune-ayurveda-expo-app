@@ -1,25 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet, Button } from 'react-native'
 import { FONT, SIZES, COLORS } from "../globals/constants/theme";
 import isEqual from 'lodash/isEqual';
 
-const FavouritePicksCard = ({ item,myCart,setMyCart, selectedJob }) => {
+
+
+const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleAddButtonPress = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setMyCart([...myCart,item]);
+    setMyCart([...myCart, item]);
   };
 
   const handleRemoveButtonPress = () => {
     if (myCart.length > 0) {
       let newCart = [];
       let found = false;
-      for(let i=0;i<myCart.length;i++)
-      {
-        let condition = isEqual(myCart[i],item);
-        if(condition==false || found)
-        newCart.push(myCart[i]);
+      for (let i = 0; i < myCart.length; i++) {
+        let condition = isEqual(myCart[i], item);
+        if (condition == false || found)
+          newCart.push(myCart[i]);
         else
           found = true;
       }
@@ -28,8 +29,8 @@ const FavouritePicksCard = ({ item,myCart,setMyCart, selectedJob }) => {
       setMyCart(newCart);
     }
   };
-  
-  const handleCardPress = (item) =>{
+
+  const handleCardPress = (item) => {
 
   }
 

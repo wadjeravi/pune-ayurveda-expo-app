@@ -22,7 +22,10 @@ const staticImages = [
   { id: '12', uri: img4, originalPrice: '$400', discountPrice: '$200', name: 'VitaminB12', description: '30 capsules', discount: "50% Off" },
 ];
 
-const CategoriesListingPage = () => {
+const CategoriesListingPage = ({route }) => {
+  const { myCart, setMyCart } = route.params || {};
+
+  console.log("myCart in CategoriesListingPage:", myCart);
   return (
     <View style={styles.container}>
       <View style={styles.leftSide}>
@@ -44,6 +47,8 @@ const CategoriesListingPage = () => {
         renderItem={({ item }) => (
           <CategoriesListingPageCard
             item={item}
+            myCart={myCart}
+            setMyCart={setMyCart}
           />
         )}
         keyExtractor={item => item?.id}

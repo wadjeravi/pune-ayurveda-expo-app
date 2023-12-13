@@ -12,7 +12,7 @@ import { colors } from '../globals/style';
 const HomeScreen = ({ navigation }) => {
 
   const [myCart, setMyCart] = useState([]);
-  
+
   return (
     <View style={styles.container}>
 
@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
         <OfferSlider />
         <FavouritePicks myCart={myCart} setMyCart={setMyCart} />
-        <Categories navigation={navigation}/>
+        <Categories navigation={navigation} myCart={myCart} setMyCart={setMyCart} />
       </ScrollView>
       <View>
         <BottomNav myCart={myCart} navigation={navigation} />
