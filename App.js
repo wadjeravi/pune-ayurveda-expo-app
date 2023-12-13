@@ -5,7 +5,8 @@ import Userprofile from './src/screens/UserProfile'
 import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
 import shoppingcart from './src/screens/shoppingcart'
-//import Map from './src/screens/Map'
+import Address from './src/screens/Address'
+import PaymentSelection from './src/screens/PaymentSelection'
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,14 +20,15 @@ export default function App() {
       <Stack.Navigator initialRouteName='HomeScreen'
         screenOptions={{
           statusBarColor: 'purple',
-
           headerStyle: {
             backgroundColor: "purple"
           },
           headerTintColor: 'white',
-          // headerTitleAlign:'center'
+          // headerTitleAlign:'center',
+          labelStyle: { paddingBottom: 3 },
         }}
       >
+
         <Stack.Screen name="home" component={HomeScreen}
           options={{
             headerShown: false,
@@ -58,6 +60,16 @@ export default function App() {
             headerShown: true,
           }}
         />
+        <Stack.Screen name="Address" component={Address}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen name="PaymentSelection" component={PaymentSelection}
+          options={{
+            headerShown: true,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -69,6 +81,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });
-
