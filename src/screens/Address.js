@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import BottomNav from '../components/BottomNav';
+import { colors } from '../globals/style';
 
-const App = () => {
+
+const App1 = () => {
+  const navigation = useNavigation(); // Use the useNavigation hook to get the navigation object
+
   const [houseNumber, setHouseNumber] = useState('');
   const [buildingNumber, setBuildingNumber] = useState('');
   const [landmark, setLandmark] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [pincode, setPincode] = useState('');
 
-  const handleSubmit = () => {
+  const handleSaveAddress = () => {
     if (!houseNumber || !buildingNumber || !phoneNumber || !pincode) {
       // Check if any mandatory field is empty
       Alert.alert('Error', 'Please fill in all mandatory fields.');
@@ -16,8 +22,14 @@ const App = () => {
     }
 
     console.log(
-      `House Number : ${houseNumber} \nBuilding : ${buildingNumber} \nLandmark : ${landmark} \nPhoneNumber : ${phoneNumber} \nPincode : ${pincode}`
+      `House Number: ${houseNumber} \nBuilding: ${buildingNumber} \nLandmark: ${landmark} \nPhoneNumber: ${phoneNumber} \nPincode: ${pincode}`
     );
+  };
+
+  const handleContinue = () => {
+    navigation.navigate('PaymentSelection');
+    // Add logic to handle "Continue" button click
+    // console.log('Continue button clicked');
   };
 
   return (
@@ -56,7 +68,22 @@ const App = () => {
         onChangeText={setPincode}
         value={pincode}
       />
-      <Button title="Save Address" onPress={handleSubmit} style={styles.SaveAddress} />
+
+      <Button
+        title="Save Address"
+        onPress={handleSaveAddress}
+        style={styles.saveAddress}
+      />
+
+      <Button
+        title="Continue"
+        onPress={handleContinue}
+        style={styles.continueButton}
+      />
+
+      <View style={styles.bottomnav}>
+        <BottomNav navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -64,7 +91,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'top',
+    justifyContent: 'Top',
     paddingHorizontal: 10,
     marginTop: 20,
   },
@@ -76,12 +103,27 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingLeft: 10,
   },
-  SaveAddress: {
+  saveAddress: {
     backgroundColor: '#800080',
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
   },
+  continueButton: {
+    backgroundColor: '#3498db',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 2,
+  },
+  bottomnav: {
+    position: 'absolute',
+    justifyContent: 'flex-end',
+    bottom: 0,
+    width: '120%',
+    backgroundColor: colors.col1,
+    Index: 20,
+    height: 50,
+  },
 });
 
-export default App;
+export default App1;

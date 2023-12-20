@@ -6,11 +6,13 @@ import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
 import shoppingcart from './src/screens/shoppingcart'
 import Address from './src/screens/Address'
+import Orders from './src/screens/Orders'
 import PaymentSelection from './src/screens/PaymentSelection'
 
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 
 export default function App() {
@@ -39,11 +41,6 @@ export default function App() {
             headerShown: true,
           }}
         />
-        {/* <Stack.Screen name="map" component={Map}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen name="Settings" component={Settings}
           options={{
             headerShown: true,
@@ -52,7 +49,6 @@ export default function App() {
         <Stack.Screen name="shoppingcart" component={shoppingcart}
           options={{
             headerShown: true,
-
           }}
         />
         <Stack.Screen name="categoriesListingPage" component={CategoriesListingPage}
@@ -61,6 +57,11 @@ export default function App() {
           }}
         />
         <Stack.Screen name="Address" component={Address}
+          options={{
+            headerShown: true,
+          }}
+        />
+         <Stack.Screen name="Orders" component={Orders}
           options={{
             headerShown: true,
           }}
