@@ -74,7 +74,7 @@ const App1 = () => {
         onPress={handleSaveAddress}
         style={styles.saveAddress}
       />
-
+      
       <Button
         title="Continue"
         onPress={handleContinue}
@@ -114,15 +114,20 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 2,
+    marginBottom: 20,
+    // height:30,
   },
   bottomnav: {
     position: 'absolute',
     justifyContent: 'flex-end',
     bottom: 0,
-    width: '120%',
+    width: '110%',
     backgroundColor: colors.col1,
     Index: 20,
     height: 50,
+    
+    // marginLeft:50,
+    // marginRight:50,
   },
 });
 
