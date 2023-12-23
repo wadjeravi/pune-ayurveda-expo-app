@@ -5,7 +5,7 @@ import BottomNav from '../components/BottomNav';
 import { colors } from '../globals/style';
 
 
-const App1 = () => {
+const Address = () => {
   const navigation = useNavigation(); // Use the useNavigation hook to get the navigation object
 
   const [houseNumber, setHouseNumber] = useState('');
@@ -69,12 +69,12 @@ const App1 = () => {
         value={pincode}
       />
 
-      <Button
+      {/* <Button
         title="Save Address"
         onPress={handleSaveAddress}
         style={styles.saveAddress}
-      />
-      
+      /> */}
+
       <Button
         title="Continue"
         onPress={handleContinue}
@@ -125,10 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.col1,
     Index: 20,
     height: 50,
-    
-    // marginLeft:50,
-    // marginRight:50,
   },
 });
 
-export default App1;
+export default Address;
