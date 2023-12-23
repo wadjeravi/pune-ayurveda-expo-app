@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 
 
 
-const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob }) => {
+const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleAddButtonPress = () => {
@@ -31,7 +31,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob }) => {
   };
 
   const handleCardPress = (item) => {
-
+    navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
   }
 
   return (
@@ -52,7 +52,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob }) => {
       </View>
       <View style={{ alignItems: 'left', justifyContent: 'center' }}>
         <Text style={{ fontSize: SIZES.large }}>{item.name}</Text>
-        <Text style={{ fontSize: SIZES.large }}>{item.description}</Text>
+        <Text style={{ fontSize: SIZES.large }}>{item.qty}</Text>
       </View>
       <View style={{ marginBottom: 20 }}>
         {/* Add space between name view and addbutton */}

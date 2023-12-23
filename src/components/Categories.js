@@ -28,6 +28,7 @@ const Categories = ({ navigation, myCart, setMyCart }) => {
       navigation.navigate('categoriesListingPage', { 
         myCart,
         setMyCart,
+        navigation
       }); 
      }}>
       <Text style={styles.cardName}>{item.name}</Text>

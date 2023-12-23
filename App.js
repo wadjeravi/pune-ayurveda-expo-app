@@ -4,6 +4,7 @@ import HomeScreen from './src/screens/HomeScreen'
 import Userprofile from './src/screens/UserProfile'
 import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
+import ProductDescriptionPage from './src/screens/ProductDescriptionPage'
 import shoppingcart from './src/screens/shoppingcart'
 //import Map from './src/screens/Map'
 
@@ -54,6 +55,11 @@ export default function App() {
           }}
         />
         <Stack.Screen name="categoriesListingPage" component={CategoriesListingPage}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen name="productDescriptionPage" component={ProductDescriptionPage}
           options={{
             headerShown: true,
           }}

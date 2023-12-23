@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import isEqual from 'lodash/isEqual';
 
-const CategoriesListingPageCard = ({ item, selectedJob, handleCardPress, myCart, setMyCart }) => {
+const CategoriesListingPageCard = ({ item, selectedJob, navigation, myCart, setMyCart }) => {
     // Initialize quantity based on whether the item is in myCart
     const initialQuantity = myCart.filter(cartItem => isEqual(cartItem, item)).length;
     const [quantity, setQuantity] = useState(initialQuantity);
@@ -27,6 +27,9 @@ const CategoriesListingPageCard = ({ item, selectedJob, handleCardPress, myCart,
       setMyCart(newCart);
     }
   };
+  const handleCardPress = (item) => {
+    navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
+  }
 
   return (
     <TouchableOpacity
@@ -46,7 +49,7 @@ const CategoriesListingPageCard = ({ item, selectedJob, handleCardPress, myCart,
       </View>
       <View style={{ alignItems: 'left', justifyContent: 'center' }}>
         <Text style={styles.nameText}>{item.name}</Text>
-        <Text style={styles.descriptionText}>{item.description}</Text>
+        <Text style={styles.descriptionText}>{item.qty}</Text>
       </View>
       <View style={{ marginBottom: 30 }}>
         {/* Add space between name view and addbutton */}

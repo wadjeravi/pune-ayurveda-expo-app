@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, View, StatusBar, TextInput, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import HomeHeadNav from '../components/HomeHeadNav';
 import OfferSlider from '../components/OfferSlider';
@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
         <OfferSlider />
-        <FavouritePicks myCart={myCart} setMyCart={setMyCart} />
+        <FavouritePicks navigation={navigation} myCart={myCart} setMyCart={setMyCart} />
         <Categories navigation={navigation} myCart={myCart} setMyCart={setMyCart} />
       </ScrollView>
       <View>
