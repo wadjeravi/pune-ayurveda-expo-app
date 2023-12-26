@@ -9,7 +9,7 @@ const CategoriesListingPageCard = ({ item, selectedJob, navigation, myCart, setM
 
   const handleAddButtonPress = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setMyCart((prevCart) => [...prevCart, item]);
+    setMyCart([...myCart, item]);
   };
   const handleRemoveButtonPress = () => {
     if (myCart.length > 0) {
@@ -30,7 +30,7 @@ const CategoriesListingPageCard = ({ item, selectedJob, navigation, myCart, setM
   const handleCardPress = (item) => {
     navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
   }
-
+  
   return (
     <TouchableOpacity
       style={styles.container(selectedJob, item)}

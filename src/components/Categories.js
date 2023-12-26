@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useEffect} from "react";
 import { TouchableOpacity, View, Text, Image, FlatList, StyleSheet } from "react-native";
 import { FONT, SIZES, COLORS } from "../globals/constants/theme"
 import img1 from '../../assets/Images/vitaminB12.jpg';
@@ -36,7 +36,9 @@ const Categories = ({ navigation, myCart, setMyCart }) => {
       <Image source={item.uri} style={styles.cardImage} />
     </TouchableOpacity>
   );
-
+  useEffect(()=>{
+   
+  },[myCart])
   return (
     <View style={styles.container}>
       <View style={styles.header}>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { View, Image, Text, TouchableOpacity, FlatList, ScrollView, StyleSheet } from 'react-native'
 import { FONT, SIZES, COLORS } from "../globals/constants/theme";
 import img1 from '../../assets/Images/vitaminB12.jpg';
@@ -15,6 +15,10 @@ const FavouritePicks = ({ navigation, myCart,setMyCart}) => {
     { id: '3', uri: img3, originalPrice: '$300', discountPrice: '$150', name: 'GreenTea', qty: '80g', discount: "50% Off", description:"It's not just a cup of tea, its therapy - One Sip at a Time. Lipton Green Tea is not just a regular cup of chai, we believe it's therapy for your body. Wake up to a morning cup of hot Lipton green tea and feel how it leaves you feeling light and active. Awaken your senses - one sip at a time. Lipton Green Tea Bags in Honey Lemon Flavor have this goodness. Choose Lipton Green Tea Honey Lemon as your go-to beverage during the day. Buy Now! Magic of Green Tea Green tea is produced when freshly plucked leaves are heated, rolled/cut and then dried. The catechins in the fresh leaves are preserved during the green tea process, making green tea rich in catechins. Also, green tea is typically drunk without milk and sugar and hence gives zero calories as compared to the ordinary chai made with milk and sugar. Available in a Range of Flavors Lipton offers a range of different flavours to ensure that you are offered variety and enjoyment while drinking tea. Lipton flavours some of its teas with added natural flavours and no artificial flavours are used. You may try Lipton Green tea in Pure & Light (unflavored), Tulsi Natura, Honey & Lemon and Lemon Zest flavors as well, available in pack sizes of 10s and 25s Tea bags. Next best to Water Brewed, Unsweetened Lipton Green Tea being 99.5% water is a great way to meet your daily required fluid intake. Staying hydrated is essential to ensure bodily functions are carried out efficiently" },
     { id: '4', uri: img4, originalPrice: '$400', discountPrice: '$200', name: 'VitaminB12', qty: '30 capsules', discount: "50% Off", description:"Himalayan Organics brings to you Plant-based Vitamin B12 to support various roles in your body. A blend of plant-based extracts like Stevia Leaves, Alfalfa Leaves, Moringa, Wheat Grass, Green Amla & Beetroot, these capsules fulfill the daily dose of Vitamin B12 in your body. Your body needs Vitamin B12 for normal functioning of nerve cells, red blood cell formulation, boosting energy, DNA synthesis, and improving memory. Experience healthy days by incorporating these capsules into your daily life! Green Superfood with 5X power!" },
   ];
+
+  useEffect(()=>{
+    
+  },[myCart])
 
   return (
     <View style={styles.container}>

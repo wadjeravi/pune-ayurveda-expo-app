@@ -6,8 +6,8 @@ import isEqual from 'lodash/isEqual';
 
 
 const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }) => {
-  const [quantity, setQuantity] = useState(0);
-
+  const initialQuantity = myCart.filter(cartItem => isEqual(cartItem, item)).length;
+  const [quantity, setQuantity] = useState(initialQuantity);
   const handleAddButtonPress = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
     setMyCart([...myCart, item]);
@@ -64,7 +64,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }
         <Text style={styles.discountPrices}>{item.discountPrice}</Text>
       </View>
       <View style={styles.addButtonContainer}>
-        {quantity === 0 ? (
+        {initialQuantity === 0 ? (
           <TouchableOpacity onPress={handleAddButtonPress}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Add</Text>
@@ -75,7 +75,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }
             <TouchableOpacity onPress={handleRemoveButtonPress}>
               <Text style={styles.buttonText}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.quantityText}>{quantity}</Text>
+            <Text style={styles.quantityText}>{initialQuantity}</Text>
             <TouchableOpacity onPress={handleAddButtonPress}>
               <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
