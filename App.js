@@ -8,6 +8,7 @@ import shoppingcart from './src/screens/shoppingcart'
 import Address from './src/screens/Address'
 import Orders from './src/screens/Orders'
 import PaymentSelection from './src/screens/PaymentSelection'
+import Notification from './src/screens/Notification'
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -30,7 +31,6 @@ export default function App() {
           labelStyle: { paddingBottom: 3 },
         }}
       >
-
         <Stack.Screen name="home" component={HomeScreen}
           options={{
             headerShown: false,
@@ -61,7 +61,12 @@ export default function App() {
             headerShown: true,
           }}
         />
-         <Stack.Screen name="Orders" component={Orders}
+        <Stack.Screen name="Orders" component={Orders}
+          options={{
+            headerShown: true,
+          }}
+        />
+         <Stack.Screen name="Notification" component={Notification}
           options={{
             headerShown: true,
           }}
