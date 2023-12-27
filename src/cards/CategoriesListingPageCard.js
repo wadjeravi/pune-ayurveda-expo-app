@@ -4,29 +4,50 @@ import isEqual from 'lodash/isEqual';
 
 const CategoriesListingPageCard = ({ item, selectedJob, navigation, myCart, setMyCart }) => {
     // Initialize quantity based on whether the item is in myCart
-    const initialQuantity = myCart.filter(cartItem => isEqual(cartItem, item)).length;
+    const initialQuantity = myCart.filter(cartItem => isEqual(cartItem.item, item)).length;
     const [quantity, setQuantity] = useState(initialQuantity);
 
-  const handleAddButtonPress = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-    setMyCart([...myCart, item]);
-  };
-  const handleRemoveButtonPress = () => {
-    if (myCart.length > 0) {
-      let newCart = [];
-      let found = false;
-      for (let i = 0; i < myCart.length; i++) {
-        let condition = isEqual(myCart[i], item);
-        if (condition == false || found)
-          newCart.push(myCart[i]);
+    const handleAddButtonPress = () => {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+      let found = false
+      let newCart = []
+      for(let i=0;i<myCart.length;i++)
+      {
+        if(isEqual(myCart[i].item,item)==true)
+        {
+          newCart.push({"item":myCart[i].item,"quantity":myCart[i].quantity+1})
+          found = true
+          break;
+        }
         else
-          found = true;
+        {
+          newCart.push(myCart[i])
+        }
       }
-      console.log(newCart);
-      setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0)); // Ensure quantity doesn't go below 0
+      if(found==false)
+      {
+        newCart.push({"item":item,"quantity":1})
+      }
+      console.log(newCart)
       setMyCart(newCart);
-    }
-  };
+    };
+  
+    const handleRemoveButtonPress = () => {
+      if (myCart.length > 0) {
+        let newCart = [];
+  
+        for (let i = 0; i < myCart.length; i++) {
+          let condition = isEqual(myCart[i].item, item);
+          if (condition == true && myCart[i].quantity>1)
+            newCart.push({"item":item,"quantity":myCart[i].quantity-1});
+          else if(condition==false)
+          newCart.push(myCart[i])
+        }
+        console.log(newCart)
+        setQuantity((prevQuantity) => prevQuantity - 1);
+        setMyCart(newCart);
+      }
+    };
   const handleCardPress = (item) => {
     navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
   }

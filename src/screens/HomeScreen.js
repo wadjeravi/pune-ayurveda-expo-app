@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
         <Categories navigation={navigation} myCart={myCart} setMyCart={setMyCart} />
       </ScrollView>
       <View>
-        <BottomNav myCart={myCart} navigation={navigation} />
+        <BottomNav myCart={myCart} setMyCart={setMyCart} navigation={navigation} />
       </View>
     </View>
   );

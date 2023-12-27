@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { colors } from '../globals/style';
 
-const BottomNav = ({ myCart, navigation }) => {
+const BottomNav = ({ myCart,setMyCart, navigation }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -18,7 +18,7 @@ const BottomNav = ({ myCart, navigation }) => {
             <Text style={styles.cartItem}>{myCart.length}</Text>
           </View>
         )}
-        <AntDesign name="shoppingcart" size={30} color="black" style={[styles.icon1, styles.cartIcon]} onPress={() => { navigation.navigate('shoppingcart') }} />
+        <AntDesign name="shoppingcart" size={30} color="black" style={[styles.icon1, styles.cartIcon]} onPress={() => { navigation.navigate('shoppingcart',{myCart,setMyCart}) }} />
       </View>
       {/* <View>
         <FontAwesome5 name="map" size={30} color="black" style={styles.icon1} onPress={() => { navigation.navigate('Map') }} />

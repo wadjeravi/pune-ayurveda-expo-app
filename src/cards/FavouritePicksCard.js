@@ -6,30 +6,49 @@ import isEqual from 'lodash/isEqual';
 
 
 const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }) => {
-  const initialQuantity = myCart.filter(cartItem => isEqual(cartItem, item)).length;
+  const initialQuantity = myCart.filter(cartItem => isEqual(cartItem.item, item)).length;
   const [quantity, setQuantity] = useState(initialQuantity);
   const handleAddButtonPress = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setMyCart([...myCart, item]);
+    let found = false
+    let newCart = []
+    for(let i=0;i<myCart.length;i++)
+    {
+      if(isEqual(myCart[i].item,item)==true)
+      {
+        newCart.push({"item":myCart[i].item,"quantity":myCart[i].quantity+1})
+        found = true
+        break;
+      }
+      else
+      {
+        newCart.push(myCart[i])
+      }
+    }
+    if(found==false)
+    {
+      newCart.push({"item":item,"quantity":1})
+    }
+    console.log(newCart)
+    setMyCart(newCart);
   };
 
   const handleRemoveButtonPress = () => {
     if (myCart.length > 0) {
       let newCart = [];
-      let found = false;
+
       for (let i = 0; i < myCart.length; i++) {
-        let condition = isEqual(myCart[i], item);
-        if (condition == false || found)
-          newCart.push(myCart[i]);
-        else
-          found = true;
+        let condition = isEqual(myCart[i].item, item);
+        if (condition == true && myCart[i].quantity>1)
+          newCart.push({"item":item,"quantity":myCart[i].quantity-1});
+        else if(condition==false)
+        newCart.push(myCart[i])
       }
       console.log(newCart)
       setQuantity((prevQuantity) => prevQuantity - 1);
       setMyCart(newCart);
     }
   };
-
   const handleCardPress = (item) => {
     navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
   }
@@ -64,7 +83,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }
         <Text style={styles.discountPrices}>{item.discountPrice}</Text>
       </View>
       <View style={styles.addButtonContainer}>
-        {initialQuantity === 0 ? (
+        {quantity === 0 ? (
           <TouchableOpacity onPress={handleAddButtonPress}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Add</Text>
@@ -75,7 +94,7 @@ const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }
             <TouchableOpacity onPress={handleRemoveButtonPress}>
               <Text style={styles.buttonText}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.quantityText}>{initialQuantity}</Text>
+            <Text style={styles.quantityText}>{quantity}</Text>
             <TouchableOpacity onPress={handleAddButtonPress}>
               <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
