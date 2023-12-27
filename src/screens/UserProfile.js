@@ -1,7 +1,6 @@
-import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather'
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const SECTIONS = [
     {
@@ -18,22 +17,17 @@ const SECTIONS = [
         ],
     },
 ];
-export default function Example() {
-    const [form, setForm] = useState({
-    })
+
+export default function Example({ navigation }) {
+    const [form, setForm] = useState({});
+
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6', marginBottom: 10 }}>
             <ScrollView contentContainerStyle={styles.container}>
-                <View style={styles.header}>
-                    {/* <Text style={styles.title}> Setting</Text> */}
-                    {/* <Text style={styles.header}> Pune Aurveda Cash</Text> */}
-                </View>
+                <View style={styles.header}></View>
                 <View style={styles.viewStyle}>
                     <View style={styles.rectangle}>
-                        <Text style={styles.textStyle}>
-                            Pune Ayurveda Cash   <FeatherIcon
-                                name="chevron-right" color="#E0115F" size={22} style={{ marginRight: 12 }} />
-                        </Text>
+                        <Text style={styles.textStyle}>Pune Ayurveda</Text>
                     </View>
                 </View>
                 {SECTIONS.map(({ header, items }) => (
@@ -46,12 +40,23 @@ export default function Example() {
                                 <View
                                     style={[
                                         styles.rowWrapper,
-                                        index === 0 && { borderTopwidth: 0 },
+                                        index === 0 && { borderTopWidth: 0 },
                                     ]}
                                     key={id}>
                                     <TouchableOpacity
                                         onPress={() => {
-                                            //handel onPress
+                                            if (id === 'Orders') {
+                                                navigation.navigate('Orders');
+                                            }
+
+                                            else if (id === 'Address') {
+                                                navigation.navigate('Address');
+                                            }
+
+                                            else if (id === 'Notification') {
+                                                navigation.navigate('Notification');
+                                            }
+
                                         }}>
                                         <View style={styles.row}>
                                             <FeatherIcon name={icon} color="#800080" size={22} style={{ marginRight: 12 }}
@@ -102,10 +107,10 @@ const styles = StyleSheet.create({
         backgroundColor: "lightgreen",
         padding: 10,
         borderRadius: 10,
-        // marginTop:10,
         marginLeft: 20,
         marginRight: 20,
         // marginBottom:30,
+        // marginTop:10,
     },
     textStyle: {
         fontSize: 15,
@@ -117,19 +122,6 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         color: '#929292'
     },
-    // section:{
-    //     paddingTop:20,
-    // },
-    // sectionHeader:{
-    //     paddingHorizontal:24,
-    //     paddingVertical:8,
-    // },
-    // sectionHeaderText:{
-    //     fontSize:12,
-    //     fontWeight:'600',
-    //     color:'#a7a7a7',
-    //     textTransform:'uppercase',     
-    // },
     rowWrapper: {
         paddingLeft: 24,
         borderTopWidth: 1,
@@ -158,3 +150,6 @@ const styles = StyleSheet.create({
         marginRight: 4,
     }
 });
+
+
+
