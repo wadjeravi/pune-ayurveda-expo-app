@@ -7,8 +7,16 @@ const Usercart = ({ route }) => {
 
   const initialQuantity = myCart.filter(cartItem => isEqual(cartItem.item, item)).length;
   const [quantity, setQuantity] = useState(initialQuantity);
-  
-  const handleAddButtonPress = () => {
+
+  let totalPrice = 0.0
+  let discountPrice = 0.0
+  for(let i=0;i<myCart.length;i++){
+    discountPrice = myCart[i].item.discountPrice
+    let amount = discountPrice.replace(/\$/g, '');
+    totalPrice += (Number(amount) * myCart[i].quantity)
+  }
+
+  const handleAddButtonPress = (item) => {
     setQuantity((prevQuantity) => prevQuantity + 1);
     let found = false
     let newCart = []
@@ -69,14 +77,14 @@ const Usercart = ({ route }) => {
                 <Text style={styles.buttonText}>-</Text>
               </TouchableOpacity>
               <Text style={styles.quantityText}>{item.quantity}</Text>
-              <TouchableOpacity onPress={handleAddButtonPress}>
+              <TouchableOpacity onPress={()=>{handleAddButtonPress(item.item)}}>
                 <Text style={styles.buttonText}>+</Text>
               </TouchableOpacity>
             </View>
 
 
             <View style={{ marginLeft: 10 }}>
-              <Text>{item.item.originalPrice}</Text>
+              <Text>{totalPrice}</Text>
             </View>
           </View>
         ))}
