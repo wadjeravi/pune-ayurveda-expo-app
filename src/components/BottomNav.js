@@ -1,45 +1,34 @@
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { AntDesign, Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { colors } from '../globals/style';
 
-const BottomNav = ({ navigation, activeScreen }) => {
-  const navigateToScreen = (screenName) => {
-    navigation.navigate(screenName);
-  };
-
-  const bottomNavItems = [
-    { icon: 'settings', label: 'Settings', screen: 'Settings' },
-    { icon: 'shoppingcart', label: 'Cart', screen: 'shoppingcart' },
-    // Add more items as needed
-    // { icon: 'map', label: 'Map', screen: 'Map' },
-  ];
-
+const BottomNav = ({ myCart,setMyCart, navigation }) => {
   return (
     <View style={styles.container}>
-      {bottomNavItems.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => navigateToScreen(item.screen)}
-          style={[styles.item, item.screen === activeScreen ? styles.activeItem : null]}
-        >
-          <View style={styles.iconContainer}>
-            {item.icon === 'settings' && (
-              <Feather name={item.icon} size={30} color={item.screen === activeScreen ? 'black' : 'purple'} />
-            )}
-            {item.icon === 'shoppingcart' && (
-              <AntDesign name={item.icon} size={30} color={item.screen === activeScreen ? 'black' : 'purple'} />
-            )}
-            {/* Add more conditions for other icons */}
+      <View>
+        <Feather name="settings" size={30} color="black" style={styles.icon1} onPress={() => { navigation.navigate('Settings') }} />
+      </View>
+      <View style={styles.cartContainer}>
+        {myCart.length > 0 && (
+          <View style={styles.cartItemContainer}>
+            <Text style={styles.cartItem}>{myCart.length}</Text>
           </View>
-          <Text style={[styles.label, { color: item.screen === activeScreen ? 'black' : colors.text4 }]}>
-            {item.label}
-          </Text>
-        </TouchableOpacity>
-      ))}
+        )}
+        <AntDesign name="shoppingcart" size={30} color="black" style={[styles.icon1, styles.cartIcon]} onPress={() => { navigation.navigate('shoppingcart',{myCart,setMyCart}) }} />
+      </View>
+      {/* <View>
+        <FontAwesome5 name="map" size={30} color="black" style={styles.icon1} onPress={() => { navigation.navigate('Map') }} />
+      </View> */}
     </View>
+
   );
 };
+
+export default BottomNav;
 
 const styles = StyleSheet.create({
   container: {
@@ -49,34 +38,33 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     elevation: 30,
-    height: 55,
+    height: 50,
     borderTopWidth: 0.5,
   },
-  item: {
-    flex: 1,
-    alignItems: 'center',
+  icon1: {
+    color: colors.text4,
   },
-  activeItem: {
-    backgroundColor: colors.activeBackgroundColor,
+  cartContainer: {
+    position: 'relative', // Ensure relative positioning for the cart container
   },
-  iconContainer: {
-    marginTop: 8,
-    backgroundColor: colors.col1,
-    borderRadius: 50,
-    elevation: 8,
+  cartItemContainer: {
+    position: 'absolute',
+    top: -2,
+    right: -2,
+    backgroundColor: 'red', // Set your desired background color
+    borderRadius: 50, // Set borderRadius to make it round (half of the width/height)
+    width: 18, // Set your desired width
+    height: 18, // Set your desired height
     justifyContent: 'center',
     alignItems: 'center',
-    height: 40,
-    width: 40,
-    marginTop:2,
+    zIndex: 2, 
   },
-
-  label: {
-    fontSize: 9,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop:-2,
+  cartItem: {
+    color: 'white', // Set your desired text color
+    fontSize: 10, // Set your desired font size
+    fontWeight: 'bold',
+  },
+  cartIcon: {
+    zIndex: 1, // Set zIndex to ensure the cart icon is behind the round
   },
 });
-
-export default BottomNav;

@@ -1,19 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet, Button } from 'react-native'
 import { FONT, SIZES, COLORS } from "../globals/constants/theme";
+import isEqual from 'lodash/isEqual';
 
-const FavouritePicksCard = ({ item, selectedJob, handleCardPress }) => {
-  const [quantity, setQuantity] = useState(0);
 
+
+const FavouritePicksCard = ({ item, myCart, setMyCart, selectedJob, navigation }) => {
+  const initialQuantity = myCart.filter(cartItem => isEqual(cartItem.item, item)).length;
+  const [quantity, setQuantity] = useState(initialQuantity);
   const handleAddButtonPress = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
+    let found = false
+    let newCart = []
+    for(let i=0;i<myCart.length;i++)
+    {
+      if(isEqual(myCart[i].item,item)==true)
+      {
+        newCart.push({"item":myCart[i].item,"quantity":myCart[i].quantity+1})
+        found = true
+        break;
+      }
+      else
+      {
+        newCart.push(myCart[i])
+      }
+    }
+    if(found==false)
+    {
+      newCart.push({"item":item,"quantity":1})
+    }
+    console.log(newCart)
+    setMyCart(newCart);
   };
 
   const handleRemoveButtonPress = () => {
-    if (quantity > 0) {
+    if (myCart.length > 0) {
+      let newCart = [];
+
+      for (let i = 0; i < myCart.length; i++) {
+        let condition = isEqual(myCart[i].item, item);
+        if (condition == true && myCart[i].quantity>1)
+          newCart.push({"item":item,"quantity":myCart[i].quantity-1});
+        else if(condition==false)
+        newCart.push(myCart[i])
+      }
+      console.log(newCart)
       setQuantity((prevQuantity) => prevQuantity - 1);
+      setMyCart(newCart);
     }
   };
+  const handleCardPress = (item) => {
+    navigation.navigate('productDescriptionPage', { item, myCart,setMyCart })
+  }
 
   return (
     <TouchableOpacity
@@ -33,7 +71,7 @@ const FavouritePicksCard = ({ item, selectedJob, handleCardPress }) => {
       </View>
       <View style={{ alignItems: 'left', justifyContent: 'center' }}>
         <Text style={{ fontSize: SIZES.large }}>{item.name}</Text>
-        <Text style={{ fontSize: SIZES.large }}>{item.description}</Text>
+        <Text style={{ fontSize: SIZES.large }}>{item.qty}</Text>
       </View>
       <View style={{ marginBottom: 20 }}>
         {/* Add space between name view and addbutton */}
@@ -146,4 +184,3 @@ const styles = StyleSheet.create({
   },
 
 });
-

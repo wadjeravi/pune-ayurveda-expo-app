@@ -4,6 +4,7 @@ import HomeScreen from './src/screens/HomeScreen'
 import Userprofile from './src/screens/UserProfile'
 import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
+import ProductDescriptionPage from './src/screens/ProductDescriptionPage'
 import shoppingcart from './src/screens/shoppingcart'
 import Address from './src/screens/Address'
 import Orders from './src/screens/Orders'
@@ -56,6 +57,11 @@ export default function App() {
             headerShown: true,
           }}
         />
+        <Stack.Screen name="productDescriptionPage" component={ProductDescriptionPage}
+         options={{
+          headerShown: true,
+        }}
+      />
         <Stack.Screen name="Address" component={Address}
           options={{
             headerShown: true,
