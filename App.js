@@ -6,11 +6,15 @@ import Settings from './src/screens/Settings'
 import CategoriesListingPage from './src/screens/CategoriesListingPage'
 import ProductDescriptionPage from './src/screens/ProductDescriptionPage'
 import shoppingcart from './src/screens/shoppingcart'
-//import Map from './src/screens/Map'
+import Address from './src/screens/Address'
+import Orders from './src/screens/Orders'
+import PaymentSelection from './src/screens/PaymentSelection'
+import Notification from './src/screens/Notification'
 
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 
 export default function App() {
@@ -20,12 +24,12 @@ export default function App() {
       <Stack.Navigator initialRouteName='HomeScreen'
         screenOptions={{
           statusBarColor: 'purple',
-
           headerStyle: {
             backgroundColor: "purple"
           },
           headerTintColor: 'white',
-          // headerTitleAlign:'center'
+          // headerTitleAlign:'center',
+          labelStyle: { paddingBottom: 3 },
         }}
       >
         <Stack.Screen name="home" component={HomeScreen}
@@ -38,11 +42,6 @@ export default function App() {
             headerShown: true,
           }}
         />
-        {/* <Stack.Screen name="map" component={Map}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen name="Settings" component={Settings}
           options={{
             headerShown: true,
@@ -51,7 +50,6 @@ export default function App() {
         <Stack.Screen name="shoppingcart" component={shoppingcart}
           options={{
             headerShown: true,
-
           }}
         />
         <Stack.Screen name="categoriesListingPage" component={CategoriesListingPage}
@@ -60,6 +58,26 @@ export default function App() {
           }}
         />
         <Stack.Screen name="productDescriptionPage" component={ProductDescriptionPage}
+         options={{
+          headerShown: true,
+        }}
+      />
+        <Stack.Screen name="Address" component={Address}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen name="Orders" component={Orders}
+          options={{
+            headerShown: true,
+          }}
+        />
+         <Stack.Screen name="Notification" component={Notification}
+          options={{
+            headerShown: true,
+          }}
+        />
+        <Stack.Screen name="PaymentSelection" component={PaymentSelection}
           options={{
             headerShown: true,
           }}
@@ -75,6 +93,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });
-
