@@ -1,5 +1,5 @@
 import {React,useEffect} from "react";
-import { TouchableOpacity, View, Text, Image, FlatList, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, Image, ScrollView, StyleSheet } from "react-native";
 import { FONT, SIZES, COLORS } from "../globals/constants/theme"
 import img1 from '../../assets/Images/vitaminB12.jpg';
 import img2 from '../../assets/Images/herbalance.jpg';
@@ -23,7 +23,7 @@ const staticImages = [
 
 const Categories = ({ navigation, myCart, setMyCart }) => {
 
-  const renderGridItem = ({ item }) => (
+  const renderGridItem = ( item ) => (
     <TouchableOpacity style={styles.card} onPress={() => { 
       navigation.navigate('categoriesListingPage', { 
         myCart,
@@ -47,14 +47,13 @@ const Categories = ({ navigation, myCart, setMyCart }) => {
           <Text style={styles.headerBtn}>Show All{'>'}</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.cardContainer}>
-        <FlatList
-          data={staticImages}
-          renderItem={renderGridItem}
-          keyExtractor={(item) => item.id}
-          numColumns={4} // Set the number of columns as per your grid layout
-        />
-      </View>
+      <ScrollView contentContainerStyle={styles.cardContainer}>
+      {staticImages.map((item) => (
+        <View key={item.id} style={styles.gridItem}>
+          {renderGridItem(item)}
+        </View>
+      ))}
+    </ScrollView>
     </View>
   );
 };
@@ -86,12 +85,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   card: {
-    width: "23%", // Adjust this width to allow for space between cards
-    // height:"60",
+    width: 80, // Adjust this width to allow for space between cards
+    heighxt:200,
     aspectRatio: 1, // Maintain a 1:1 aspect ratio for the cards
     marginBottom: 5,
     marginTop: 5,
-    marginRight: "2%", // Add margin for spacing between cards
+    marginLeft:"1%",// Add margin for spacing between cards
+    marginRight: "1%", // Add margin for spacing between cards
     backgroundColor: "#F7EDF8",
     borderRadius: 10,
     alignItems: "center",
