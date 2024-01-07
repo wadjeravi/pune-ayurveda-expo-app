@@ -12,7 +12,7 @@ const COLORS = {
   
   const FONT = {
     regular: "DMRegular",
-    medium: "DMMedium",
+    // medium: "DMMedium",
     bold: "DMBold",
   };
   
